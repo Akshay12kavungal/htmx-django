@@ -4,6 +4,8 @@ from .models import Contact,Profile
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
+
 
 
 
@@ -25,6 +27,11 @@ def create_contact(request):
 
 
     return render(request,'partials/form.html',{'form':ContactForm})
+
+
+
+   
+
 
 
 def Register(request):
