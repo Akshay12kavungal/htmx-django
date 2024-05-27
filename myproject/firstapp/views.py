@@ -1,12 +1,14 @@
 from django.shortcuts import render,redirect
 from .forms import ContactForm,RegistrationForm
-from .models import Contact,Profile
+from .models import Contact,Profile,School
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 
+from django.views.generic import ListView,DeleteView,CreateView,UpdateView,DetailView
 
+from django.urls import reverse
 
 
 
@@ -77,3 +79,46 @@ def Login(request):
 
     else:
         return render(request,'registration/login.html')
+    
+
+
+#school crud operations
+
+class SchoolListView(ListView):
+    model=School
+    template_name='school/school_list.html'
+    context_object_name='school'
+
+class SchoolDetailView(DetailView):
+    model=School
+    template_name='school/school_detail.html'
+    context_object_name='schooldetail'
+
+class SchoolUpdateView(UpdateView):
+    model=School
+    template_name='school/school_update.html'
+    fields = ['name', 'principal', 'location']
+    
+
+    def get_success_url(self):
+        return reverse('school_list')
+
+
+class SchoolDeleteView(DeleteView):
+    model=School
+    template_name='school/school_delete.html'
+  
+    def get_success_url(self):
+        return reverse('school_list')
+    
+
+class SchoolCreateView(CreateView):
+    model=School
+    template_name='school/school_create.html'
+    context_object_name='schoolcreate'
+    fields = ['name', 'principal', 'location']
+
+    def get_success_url(self):
+        return reverse('school_list')
+    
+

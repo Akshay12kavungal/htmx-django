@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4 text-primary">School list</h1>
+<hr>
+
+
+<table class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th>School name</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      {% for list in school %}
+      <tr>
+        <td>{{ list.name }}</td>
+       
+        <td>
+          <a href="{% url 'school_detail' list.pk %}" class="btn btn-info btn-sm">Detail</a>
+          <a href="{% url 'school_update' list.pk %}" class="btn btn-warning btn-sm">Update</a>
+          <a href="{% url 'school_delete' list.pk %}" class="btn btn-danger btn-sm">Delete</a>
+      
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'school_create' %}" class="btn btn-primary">Add New School</a>
+
+  
+
+
+  
+{% endblock %}
+
